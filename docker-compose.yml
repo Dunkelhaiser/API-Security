@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+    secure_db:
+        container_name: secure_db
+        image: postgres:17.0-alpine3.20
+        restart: always
+        environment:
+            - POSTGRES_DB=security
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_URL="postgresql://postgres:postgres@secure_db:5432/security"
+        volumes:
+            - /data/secure_db:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - proxynet
+
+    secure_client:
+        container_name: secure_client
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+            args:
+                NEXT_PUBLIC_CLIENTVAR: "clientvar"
+        image: secure_client
+        volumes:
+            - ./:/app
+        ports:
+            - 3000:3000
+        env_file: "./.env"
+        depends_on:
+            - secure_db
+        networks:
+            - proxynet
+
+networks:
+    proxynet:
+        external: true
