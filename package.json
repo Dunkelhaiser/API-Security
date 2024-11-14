@@ -11,15 +11,28 @@
         "db:studio": "drizzle-kit studio",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
-        "db:push": "drizzle-kit push"
+        "db:push": "drizzle-kit push",
+        "db:seed": "node --env-file=.env --import=tsx ./src/server/db/seed.ts"
     },
     "dependencies": {
+        "@hookform/resolvers": "^3.9.1",
+        "@radix-ui/react-label": "^2.1.0",
+        "@radix-ui/react-slot": "^1.1.0",
+        "@tanstack/react-query": "^5.60.2",
         "@types/pg": "^8.11.10",
+        "argon2": "^0.41.1",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
         "drizzle-orm": "^0.36.2",
+        "lucide-react": "^0.456.0",
         "next": "15.0.3",
         "pg": "^8.13.1",
         "react": "19.0.0-rc-66855b96-20241106",
-        "react-dom": "19.0.0-rc-66855b96-20241106"
+        "react-dom": "19.0.0-rc-66855b96-20241106",
+        "react-hook-form": "^7.53.2",
+        "tailwind-merge": "^2.5.4",
+        "tailwindcss-animate": "^1.0.7",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
         "@types/node": "^20",
@@ -31,6 +44,7 @@
         "postcss": "^8",
         "prettier-plugin-tailwindcss": "^0.6.8",
         "tailwindcss": "^3.4.1",
+        "tsx": "^4.19.2",
         "typescript": "^5"
     },
     "packageManager": "pnpm@9.13.1+sha512.5ac37545851c55ec58521b6c285db6f848f93ca70889beb4145f5b40fe234e4ea4faee4dad12ac5c139e494374c65d9c3a6ec9a25954378fa286a250e68d2f20"
