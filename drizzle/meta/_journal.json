@@ -22,6 +22,13 @@
       "when": 1731622583062,
       "tag": "0002_yummy_nick_fury",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1731675985275,
+      "tag": "0003_cultured_jane_foster",
+      "breakpoints": true
     }
   ]
 }
