@@ -1,9 +1,11 @@
+import { updateEmailSchema } from "@/lib/schemas/updateEmail";
 import { db } from "@/server/db";
 import { user } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function PUT(request: Request) {
-    const { email } = await request.json();
+    const data = await request.json();
+    const { email } = updateEmailSchema.parse(data);
     const [updatedUser] = await db
         .update(user)
         .set({ email })
