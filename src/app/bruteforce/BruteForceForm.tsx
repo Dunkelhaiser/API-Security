@@ -69,7 +69,7 @@ const BruteForceForm = () => {
                 />
                 <Button type="submit">Sign In</Button>
             </form>
-            {signInHandler.isError && <p className="font-medium text-red-500">Wrong credentials</p>}
+            {signInHandler.isError && <p className="font-medium text-red-500">{signInHandler.error.message}</p>}
             {signInHandler.isSuccess && <p className="font-medium text-emerald-700">Signed in successfully</p>}
         </Form>
     );

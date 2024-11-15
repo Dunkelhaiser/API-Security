@@ -3,6 +3,7 @@ import { db } from "@/server/db";
 import { user as userTable } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import * as argon2 from "argon2";
+import rateLimitMiddleware from "../../rateLimiter";
 
 async function signIn(request: Request) {
     const body = await request.json();
@@ -27,4 +28,4 @@ async function signIn(request: Request) {
     return Response.json("Signed in successfully");
 }
 
-export const POST = signIn;
+export const POST = rateLimitMiddleware(signIn);
