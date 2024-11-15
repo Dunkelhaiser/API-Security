@@ -10,5 +10,8 @@ export async function PUT(request: Request) {
         .where(eq(user.id, "5fbec927-87e4-4fd0-998e-f9db786132ea"))
         .returning();
 
+    // Raw SQL equivalent:
+    // sql`UPDATE ${user} SET ${user.email} = ${email} WHERE ${user.id} = '5fbec927-87e4-4fd0-998e-f9db786132ea' RETURNING *`;
+
     return Response.json(updatedUser);
 }
