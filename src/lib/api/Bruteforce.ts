@@ -9,6 +9,9 @@ export const useSignIn = () => {
                 body: JSON.stringify(credentials),
             });
             const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data);
+            }
             return data;
         },
     });
