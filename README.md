@@ -109,7 +109,6 @@ docker compose exec app pnpm run db:migrate # otherwise
 │   │   ├── sql_injection           # SQL injection example page and components
 │   │   ├── xss                     # XSS example page and components
 │   │   ├── layout.tsx              # App entry point
-│   │   ├── page.tsx                # Index page
 │   │   └── Providers.tsx           # React Context Providers 
 │   ├── components                  # React components
 │   └── lib                         
