@@ -1,5 +1,7 @@
 ### Requirements
 
+#### With Docker
+
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
@@ -22,7 +24,7 @@ cd API-Security
 4. Start the app with Docker Compose:
 
 ```shell
-docker-compose up
+docker compose up
 ```
 
 5. Run the database migrations:
@@ -30,7 +32,9 @@ docker-compose up
 ```shell
 pnpm run db:migrate # if you have pnpm installed locally
 
-docker-compose exec app pnpm run db:migrate # otherwise
+# or
+
+docker compose exec app pnpm run db:migrate # otherwise
 ```
 
 6. Open the app in your browser at [http://localhost:3000](http://localhost:3000)
