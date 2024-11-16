@@ -17,6 +17,7 @@ This project is a web application that demonstrates common security vulnerabilit
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [Drizzle](https://orm.drizzle.team/)
+- [Argon2](https://www.npmjs.com/package/argon2)
 
 ##### Frontend
 
