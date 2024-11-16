@@ -256,3 +256,46 @@ export async function POST(request: Request) {
 ```
 
 Here, the search term is passed as a parameterized query instead of directly interpolated into the SQL query. This prevents SQL injection attacks, as the search term is treated as data and not as part of the query.
+
+#### XSS
+
+Cross-site scripting (XSS) is a vulnerability where an attacker can inject malicious scripts into a web application. This can lead to data theft, session hijacking, and other security issues.
+
+##### Vulnerable
+
+```ts
+export async function POST(request: Request) {
+    const data = await request.json();
+    const { comment } = createCommentSchema.parse(data);
+
+    const createdComment = await db.insert(commentsTable).values({ comment }).returning();
+
+    return Response.json(createdComment);
+}
+```
+
+Here, the comment is stored in the database without any sanitization. If the comment contains HTML or JavaScript code, it will be executed when displayed on the frontend, leading to XSS attacks.
+
+##### Safe
+
+```ts
+    const createdComment = await db
+        .insert(commentsTable)
+        .values({ comment: sanitizeHtml(comment) }) // Sanitize HTML tags
+        .returning();
+```
+
+Here, the comment is sanitized using a `sanitizeHtml` function before storing it in the database. This prevents any HTML or JavaScript code from being executed when displayed on the frontend.
+
+```ts
+export function sanitizeHTML(string: string) {
+    return string
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+```
+
+The `sanitizeHtml` function replaces special characters with their HTML entities to treat the comment as plain text and prevent XSS attacks.
