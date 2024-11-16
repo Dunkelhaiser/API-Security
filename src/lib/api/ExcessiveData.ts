@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useUpdateEmail = () => {
     const queryClient = useQueryClient();
 
-    const unsafeUrl = "/api/excessive_data/update_email_excessive";
+    const unsafeUrl = "/api/excessive_data/update_email_vulnerable";
     const _safeUrl = "/api/excessive_data/update_email_safe";
 
     return useMutation({
