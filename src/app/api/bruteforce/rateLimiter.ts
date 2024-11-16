@@ -21,7 +21,6 @@ export default function rateLimitMiddleware(handler: (req: Request, res: Respons
         }
 
         if (ipData.count >= limit) {
-            // return res.status(429).send("Too Many Requests");
             return Response.json("Too Many Requests", { status: 429 });
         }
 
