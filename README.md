@@ -1,5 +1,24 @@
 # Documentation. Аналіз і захист веб-API: Вивчення загроз та методів захисту
 
+## Table of Contents
+
+- [About](#about)
+- [Technologies](#technologies)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Project structure](#project-structure)
+- [Architecture](#architecture)
+- [Overview](#overview)
+  - [Excessive data exposure](#excessive-data-exposure)
+  - [Data Validation](#data-validation)
+  - [SQL Injection](#sql-injection)
+  - [XSS](#xss)
+  - [CORS](#cors)
+  - [Credentials Stuffing](#credentials-stuffing)
+  - [Brute-force](#brute-force)
+    - [Honeypot field](#honeypot-field)
+    - [Rate limiting](#rate-limiting)
+
 ### About
 
 This project is a web application that demonstrates common security vulnerabilities in web APIs and how to protect against them.
