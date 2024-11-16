@@ -116,3 +116,14 @@ docker compose exec app pnpm run db:migrate # otherwise
 ### Architecture
 
 The project is a monolith built with Next.js. The backend is a REST API built with Next.js API routes. It uses PostgreSQL as a database and Drizzle ORM as ORM for it. The frontend is a Next.js app with React components and Tanstack Query for data fetching.
+
+### Overview
+
+The app has four main sections, each demonstrating a common security vulnerability in web APIs:
+
+- Excessive data
+- SQL injection
+- XSS
+- Brute-force
+
+Each section has a safe and a vulnerable API route. The safe route demonstrates how to protect against the vulnerability, while the vulnerable route demonstrates the vulnerability.
