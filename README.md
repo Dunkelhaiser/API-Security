@@ -121,9 +121,50 @@ The project is a monolith built with Next.js. The backend is a REST API built wi
 
 The app has four main sections, each demonstrating a common security vulnerability in web APIs:
 
-- Excessive data
+- Excessive data exposure
 - SQL injection
 - XSS
 - Brute-force
 
 Each section has a safe and a vulnerable API route. The safe route demonstrates how to protect against the vulnerability, while the vulnerable route demonstrates the vulnerability.
+
+#### Excessive data exposure
+
+Excessive data exposure is a vulnerability where an API returns more data than necessary. This can lead to data leakage and privacy issues.
+
+##### Vulnerable
+
+```ts
+export async function PUT(request: Request) {
+    const data = await request.json();
+    const { email } = updateEmailSchema.parse(data);
+
+    const [updatedUser] = await db
+        .update(user)
+        .set({ email })
+        .where(eq(user.id, "5fbec927-87e4-4fd0-998e-f9db786132ea"))
+        .returning(); // Returns all columns
+
+    // Raw SQL equivalent:
+    // sql`UPDATE ${user} SET ${user.email} = ${email} WHERE ${user.id} = '5fbec927-87e4-4fd0-998e-f9db786132ea' RETURNING *`;
+
+    return Response.json(updatedUser);
+}
+```
+
+When updating a user's email, the API returns the entire updated user object. This is a vulnerability because it exposes more data than necessary, including user password. The safe route should only return needed data.
+
+##### Safe
+
+```ts
+    const { password, ...userCols } = getTableColumns(user); // exclude password column
+
+    const [updatedUser] = await db
+        .update(user)
+        .set({ email })
+        .where(eq(user.id, "5fbec927-87e4-4fd0-998e-f9db786132ea"))
+        .returning(userCols); // Returns only necessary columns
+
+    // Raw SQL equivalent:
+    // sql`UPDATE ${user} SET ${user.email} = ${email} WHERE ${user.id} = '5fbec927-87e4-4fd0-998e-f9db786132ea' RETURNING ${userCols}`;
+```
