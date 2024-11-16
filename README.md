@@ -431,3 +431,45 @@ const BruteForceForm = () => {
 ```
 
 The honeypot field is hidden from users but visible to bots.
+
+##### Rate limiting
+
+Rate limiting is a technique to limit the number of requests a user can make in a given time period. This can prevent brute-force attacks by limiting the number of password attempts.
+
+```ts
+export const POST = rateLimitMiddleware(signIn); // Rate limit the sign-in route by using rateLimitMiddleware
+```
+
+```ts
+const rateLimitMap = new Map(); // Map to store attempts count of each IP address
+
+export default function rateLimitMiddleware(handler: (req: Request, res: Response) => void) {
+    return (req: Request, res: Response) => {
+        const ip = req.headers.get("x-forwarded-for"); // Get user IP address
+        const limit = 5;
+        const time = 60 * 1000;
+
+        if (!rateLimitMap.has(ip)) {  // If IP address is not in the map, add it
+            rateLimitMap.set(ip, {
+                count: 0,
+                lastReset: Date.now(),
+            });
+        }
+
+        const ipData = rateLimitMap.get(ip);
+
+        if (Date.now() - ipData.lastReset > time) { // If time has passed, reset the count
+            ipData.count = 0;
+            ipData.lastReset = Date.now();
+        }
+
+        if (ipData.count >= limit) { // If count is greater than limit, return 429 status code
+            return Response.json("Too Many Requests", { status: 429 });
+        }
+
+        ipData.count += 1; // Increment the count for each request
+
+        return handler(req, res);
+    };
+}
+```
