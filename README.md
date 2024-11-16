@@ -1,3 +1,33 @@
+### Installation
+
+1. Clone the repository:
+
+```shell
+git clone https://github.com/Dunkelhaiser/API-Security.git
+```
+
+2. Navigate into the project directory:
+
+```shell
+cd API-Security
+```
+
+3. Set up environment variables in `.env` by copying the `.env.example` and filling in the values:
+
+4. Start the app with Docker Compose:
+
+```shell
+docker-compose up
+```
+
+5. Run the database migrations:
+
+```shell
+pnpm run db:migrate
+```
+
+6. Open the app in your browser at [http://localhost:3000](http://localhost:3000)
+
 ### Project structure
 
 ```shell
