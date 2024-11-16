@@ -324,3 +324,21 @@ const nextConfig: NextConfig = {
     },
 };
 ```
+
+#### Credentials Stuffing
+
+Credentials stuffing is a type of attack on auth system where an attacker uses a list of leaked usernames and passwords to gain unauthorized access to user accounts.
+
+While it's not possible to prevent attackers from using leaked credentials, it's possible to prevent future credentials leaks by using strong password hashing algorithms like Argon2.
+
+##### Hashing passwords on account creation
+
+```ts
+const hashedPassword = await argon2.hash(password);
+```
+
+##### Verifying passwords on sign-in
+
+```ts
+const verifiedPassword = await argon2.verify(user[0].password, password);
+```
