@@ -342,3 +342,92 @@ const hashedPassword = await argon2.hash(password);
 ```ts
 const verifiedPassword = await argon2.verify(user[0].password, password);
 ```
+
+#### Brute-force
+
+Brute-force is a type of attack where an attacker tries all possible combinations of passwords until the correct one is found. This can be prevented by using honeypot fields and rate limiting.
+
+##### Honeypot field
+
+Honeypot field is a hidden field in a form that is invisible to users but visible to bots. If the honeypot field is filled, the request is likely from a bot and can be blocked.
+
+```ts
+async function signIn(request: Request) {
+    const body = await request.json();
+    const { email, password, honeypot } = signInSchema.parse(body);
+
+    if (honeypot) {
+        return Response.json("Wrong credentials", { status: 400 });
+    }
+
+    const user = await db.select().from(userTable).where(eq(userTable.email, email));
+
+    if (user.length === 0) {
+        return Response.json("Wrong credentials", { status: 400 });
+    }
+
+    const verifiedPassword = await argon2.verify(user[0].password, password);
+
+    if (!verifiedPassword) {
+        return Response.json("Wrong credentials", { status: 400 });
+    }
+
+    return Response.json("Signed in successfully");
+}
+```
+
+If the honeypot field is filled, the request is rejected with a 400 status code and ""Wrong credentials" message to mislead the attacker.
+
+```tsx
+const BruteForceForm = () => {
+    // ...
+    return (
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="mb-3 space-y-8">
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input placeholder="mail@example.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                                <Input type="password" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="honeypot"
+                    render={({ field }) => (
+                        <FormItem className="hidden"> // Class that makes field hidden for users
+                            <FormControl>
+                                <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                /> // Honeypot field
+                <Button type="submit">Sign In</Button>
+            </form>
+            // ...
+        </Form>
+    );
+};
+```
+
+The honeypot field is hidden from users but visible to bots.
