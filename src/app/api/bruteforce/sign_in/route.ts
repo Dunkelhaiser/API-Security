@@ -1,6 +1,6 @@
 import { signInSchema } from "@/lib/schemas/signIn";
-import { db } from "@/server/db";
-import { user as userTable } from "@/server/db/schema";
+import { db } from "@/lib/db";
+import { user as userTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import * as argon2 from "argon2";
 import rateLimitMiddleware from "../../rateLimiter";

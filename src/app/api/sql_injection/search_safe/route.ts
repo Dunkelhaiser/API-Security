@@ -1,5 +1,5 @@
 import { searchSchema } from "@/lib/schemas/search";
-import { pool } from "@/server/db";
+import { pool } from "@/lib/db";
 
 export async function POST(request: Request) {
     const data = await request.json();

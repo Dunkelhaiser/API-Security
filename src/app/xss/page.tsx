@@ -1,7 +1,7 @@
-import { db } from "@/server/db";
+import { db } from "@/lib/db";
 import Comments from "./Comments";
 import CreateCommentForm from "./CreateCommentForm";
-import { comments as commentsTable } from "@/server/db/schema";
+import { comments as commentsTable } from "@/lib/db/schema";
 
 const XSS = async () => {
     const comments = await db.select().from(commentsTable);

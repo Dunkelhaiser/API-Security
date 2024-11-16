@@ -1,5 +1,5 @@
-import { db } from "@/server/db";
-import { user } from "@/server/db/schema";
+import { db } from "@/lib/db";
+import { user } from "@/lib/db/schema";
 import { eq, getTableColumns } from "drizzle-orm";
 
 export async function GET() {

@@ -1,6 +1,6 @@
 import { createCommentSchema } from "@/lib/schemas/createComment";
-import { db } from "@/server/db";
-import { comments as commentsTable } from "@/server/db/schema";
+import { db } from "@/lib/db";
+import { comments as commentsTable } from "@/lib/db/schema";
 
 export async function POST(request: Request) {
     const data = await request.json();
