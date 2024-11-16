@@ -299,3 +299,28 @@ export function sanitizeHTML(string: string) {
 ```
 
 The `sanitizeHtml` function replaces special characters with their HTML entities to treat the comment as plain text and prevent XSS attacks.
+
+#### CORS
+
+Cross-Origin Resource Sharing (CORS) is a security feature that restricts which domains can access a web API, so only trusted domains can make requests to the API, preventing scammers of creating malicious websites that can access the API.
+
+```ts
+const nextConfig: NextConfig = {
+    async headers() {
+        return [
+            {
+                source: "/api/:path*", // Match all API routes
+                headers: [
+                    { key: "Access-Control-Allow-Credentials", value: "true" }, // Allow cookies
+                    { key: "Access-Control-Allow-Origin", value: "http://localhost:3000" }, // Allowed domains
+                    { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" }, // Allowed methods
+                    {
+                        key: "Access-Control-Allow-Headers",
+                        value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                    }, // Allowed headers
+                ],
+            },
+        ];
+    },
+};
+```
