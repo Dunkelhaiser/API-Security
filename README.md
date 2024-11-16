@@ -217,3 +217,42 @@ const form = useForm<SignInInput>({
     },
 });
 ```
+
+#### SQL Injection
+
+SQL injection is a vulnerability where an attacker can execute arbitrary SQL queries on the database. This can lead to data leakage, data corruption, and unauthorized access.
+
+##### Vulnerable
+
+```ts
+export async function POST(request: Request) {
+    const data = await request.json();
+    const { search } = searchSchema.parse(data);
+
+    const query = `
+        SELECT name, email
+        FROM public.user
+        WHERE name ILIKE '%${search}%'
+    `; // Vulnerable to SQL injection, because search is not sanitized and directly interpolated into the query
+
+    // Search with SQL injection payload: "%'; DROP TABLE public.user; --" will drop the user table
+
+    const users = await pool.query(query);
+
+    return Response.json(users.rows);
+}
+```
+
+##### Safe
+
+```ts
+    const query = `
+        SELECT name, email
+        FROM public.user
+        WHERE name ILIKE $1
+    `;
+
+    const users = await pool.query(query, [`%${search}%`]);
+```
+
+Here, the search term is passed as a parameterized query instead of directly interpolated into the SQL query. This prevents SQL injection attacks, as the search term is treated as data and not as part of the query.
