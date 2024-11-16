@@ -1,5 +1,29 @@
 # Documentation. Аналіз і захист веб-API: Вивчення загроз та методів захисту
 
+### About
+
+This project is a web application that demonstrates common security vulnerabilities in web APIs and how to protect against them.
+
+#### Technologies
+
+##### Shared (backend and frontend)
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/)
+- [Next.js](https://nextjs.org/)
+- [Zod](https://zod.dev/)
+
+##### Backend
+
+- [PostgreSQL](https://www.postgresql.org/)
+- [Drizzle](https://orm.drizzle.team/)
+
+##### Frontend
+
+- [React](https://reactjs.org/)
+- [Tanstack Query](https://tanstack.com/query/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
 ### Requirements
 
 #### With Docker
