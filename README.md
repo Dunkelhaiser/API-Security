@@ -7,7 +7,7 @@
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Without Docker
+#### Without Docker
 
 - [Node.js](https://nodejs.org/en/download/)
 - [pnpm](https://pnpm.io/installation)
