@@ -1,9 +1,17 @@
+# Documentation. Аналіз і захист веб-API: Вивчення загроз та методів захисту
+
 ### Requirements
 
 #### With Docker
 
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Without Docker
+
+- [Node.js](https://nodejs.org/en/download/)
+- [pnpm](https://pnpm.io/installation)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
 ### Installation
 
