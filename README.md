@@ -168,3 +168,52 @@ When updating a user's email, the API returns the entire updated user object. Th
     // Raw SQL equivalent:
     // sql`UPDATE ${user} SET ${user.email} = ${email} WHERE ${user.id} = '5fbec927-87e4-4fd0-998e-f9db786132ea' RETURNING ${userCols}`;
 ```
+
+#### Data Validation
+
+The app uses Zod for data validation. Each API route and client form has a validation schema that defines the expected data structure. The schema is used to validate incoming data and prevent malformed requests.
+
+##### Schemas
+
+```ts
+export const createCommentSchema = zod.object({
+    comment: zod.string().trim().min(1).max(1000),
+});
+
+export const signInSchema = zod.object({
+    email: zod.string().min(1),
+    password: zod.string().min(1),
+    honeypot: zod.string().nullish(),
+});
+
+export const updateEmailSchema = zod.object({
+    email: zod.string().email(),
+});
+
+export const searchSchema = zod.object({
+    search: zod.string(),
+});
+```
+
+##### Usage in API routes
+
+```ts
+async function signIn(request: Request) {
+    const body = await request.json();
+    const { email, password, honeypot } = signInSchema.parse(body);
+    // ...
+}
+```
+
+##### Usage in forms
+
+```tsx
+const form = useForm<SignInInput>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+        email: "",
+        password: "",
+        honeypot: "",
+    },
+});
+```
