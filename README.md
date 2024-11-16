@@ -2,27 +2,39 @@
 
 ```shell
 .
-├── README.md                       # README file
-├── .github                         # GitHub folder
-├── .husky                          # Husky configuration
-├── .storybook                      # Storybook folder
-├── .vscode                         # VSCode configuration
-├── migrations                      # Database migrations
-├── public                          # Public assets folder
+├── README.md                       # Documentation
+├── drizzle                         # Database migrations
 ├── src
-│   ├── app                         # Next JS App (App Router)
+│   ├── app                         # App Router (client pages and API routes)
+│   │   ├── api                     # API routes (following safe/vulnerable pattern + additional routes if needed)
+│   │   │   ├── bruteforce          # Brute-force API routes
+│   │   │   ├── excessive_data      # Excessive data API routes
+│   │   │   ├── sql_injection       # SQL injection API routes
+│   │   │   └── xss                 # XSS API routes
+│   │   ├── bruteforce              # Brute-force example page and components
+│   │   ├── excessive_daata         # Excessive data example page and components
+│   │   ├── sql_injection           # SQL injection example page and components
+│   │   ├── xss                     # XSS example page and components
+│   │   ├── layout.tsx              # App entry point
+│   │   ├── page.tsx                # Index page
+│   │   └── Providers.tsx           # React Context Providers 
 │   ├── components                  # React components
-│   ├── libs                        # 3rd party libraries configuration
-│   ├── locales                     # Locales folder (i18n messages)
-│   ├── models                      # Database models
-│   ├── styles                      # Styles folder
-│   ├── templates                   # Templates folder
-│   ├── types                       # Type definitions
-│   ├── utils                       # Utilities folder
-│   └── validations                 # Validation schemas
-├── tests
-│   ├── e2e                         # E2E tests, also includes Monitoring as Code
-│   └── integration                 # Integration tests
+│   └── lib                         
+│       ├── api                     # API calls functions
+│       ├── db                      # Database connection, schema and seed
+│       └── shemas                  # Validation schemas
+├── .env                            # Environment variables                     
+├── .eslintrc.json                  # Code linter configuration                     
+├── .gitignore                     
+├── .prettierrc                     # Code formatter configuration
+├── components.json                 # Component library configuration
+├── docker-compose.yml              # Docker Compose file for Next.js and PostgreSQL
+├── Dockerfile                      # Docker image file for Next.js app
+├── drizzle.config.ts               # Drizzle ORM configuration
+├── next.config.ts                  # Next.js configuration
+├── package.json                    # Package manager file with dependencies and scripts
+├── pnpm-lock.yaml                  # Package manager lock file
+├── postcss.config.mjs              # PostCSS configuration
 ├── tailwind.config.js              # Tailwind CSS configuration
 └── tsconfig.json                   # TypeScript configuration
 ```
