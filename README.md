@@ -18,6 +18,7 @@
   - [Brute-force](#brute-force)
     - [Honeypot field](#honeypot-field)
     - [Rate limiting](#rate-limiting)
+- [OpenAPI Specification](#openapi-specification)
 
 ### About
 
@@ -491,3 +492,9 @@ export default function rateLimitMiddleware(handler: (req: Request, res: Respons
     };
 }
 ```
+
+### OpenAPI Specification
+
+The app uses OpenAPI Specification to document the API routes. The specification can be viewed in Swagger UI at [http://localhost:3000/docs](http://localhost:3000/docs).
+
+![](/Swagger.png)
