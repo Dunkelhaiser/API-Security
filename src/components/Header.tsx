@@ -15,6 +15,9 @@ const Header = () => {
             <Link href="/bruteforce" className="font-medium">
                 Bruteforce
             </Link>
+            <Link href="/docs" className="font-medium">
+                Docs
+            </Link>
         </header>
     );
 };
