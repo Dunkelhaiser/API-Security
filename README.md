@@ -42,6 +42,7 @@ This project is a web application that demonstrates common security vulnerabilit
 ##### Frontend
 
 - [React](https://reactjs.org/)
+- [React Hook Form](https://react-hook-form.com/)
 - [Tanstack Query](https://tanstack.com/query/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
