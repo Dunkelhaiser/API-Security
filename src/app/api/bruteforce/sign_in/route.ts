@@ -32,6 +32,9 @@ import rateLimitMiddleware from "../rateLimiter";
  *            password:
  *              type: string
  *              example: "password123"
+ *            honeypot:
+ *              type: string
+ *              example: null
  */
 async function signIn(request: Request) {
     const body = await request.json();
